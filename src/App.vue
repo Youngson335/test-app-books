@@ -31,7 +31,7 @@ body {
   color: #2c3e50;
 }
 .container {
-  max-width: calc(1000px - 10%);
+  max-width: calc(1100px - 10%);
   margin: 0 auto;
   @media (max-width: 960px) {
     max-width: calc(1000px - 30%);
@@ -44,6 +44,12 @@ body {
   }
   @media (max-width: 550px) {
     max-width: calc(700px - 50%);
+  }
+  @media (max-width: 480px) {
+    max-width: calc(600px - 50%);
+  }
+  @media (max-width: 420px) {
+    max-width: calc(550px - 50%);
   }
 }
 </style>

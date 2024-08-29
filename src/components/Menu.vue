@@ -4,7 +4,7 @@
       <li
         class="menu__item"
         v-for="item in menuItems"
-        :key="item.text"
+        :key="item.id"
         @click="changeLink(item.id)"
         :class="{ active__link: item.id === activeMenu }"
       >
@@ -25,23 +25,24 @@ export default {
         { id: 2, text: "Главная", route: "/" },
         { id: 3, text: "Настройки", route: "/settings" },
       ],
-      activeMenu: 2,
+      activeMenu: 2, // Инициализация с активным меню по умолчанию
     };
   },
   methods: {
     changeLink(id) {
       this.activeMenu = id;
-      localStorage.setItem("activeMenu", id);
+      localStorage.setItem("activeMenu", id); // Сохранение активного меню в localStorage
     },
   },
   mounted() {
     const savedMenu = localStorage.getItem("activeMenu");
     if (savedMenu) {
-      this.activeMenu = parseInt(savedMenu, 10);
+      this.activeMenu = parseInt(savedMenu, 10); // Восстановление активного меню из localStorage
     }
   },
 };
 </script>
+
 <style lang="scss">
 ul {
   list-style-type: none;
@@ -51,6 +52,12 @@ a {
   color: white;
   font-weight: 600;
   font-size: 20px;
+  @media (max-width: 550px) {
+    font-size: 15px;
+  }
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 }
 .menu {
   &__list {
@@ -64,10 +71,13 @@ a {
     li {
       padding: 5px 10px;
       border-radius: 5px;
+      @media (max-width: 550px) {
+        padding: 1px 10px;
+      }
     }
   }
   &__item {
-    opacity: 0.7;
+    opacity: 0.7; // Снижение непрозрачности для неактивных элементов
   }
 }
 .active__link {

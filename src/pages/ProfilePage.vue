@@ -24,15 +24,17 @@ export default {
     BtnSaveList,
   },
   beforeMount() {
-    this.router = useRouter();
+    this.router = useRouter(); // Используем useRouter для получения доступа к роутеру
   },
   methods: {
     goToPostBook() {
+      // Проверяем, что текущий маршрут не является 'postBook'
       if (this.router && this.router.currentRoute.value.name !== "postBook") {
         this.router.push({ name: "postBook" });
       }
     },
     goToCheckList() {
+      // Проверяем, что текущий маршрут не является 'checkList'
       if (this.router && this.router.currentRoute.value.name !== "checkList") {
         this.router.push({ name: "checkList" });
       }
@@ -48,14 +50,35 @@ export default {
     justify-content: start;
     align-items: center;
     margin-bottom: 20px;
+    button {
+      @media (max-width: 690px) {
+        font-size: 13px;
+      }
+      @media (max-width: 480px) {
+        font-size: 13px;
+      }
+    }
+    @media (max-width: 550px) {
+      font-size: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
     &--btn {
       margin-right: 10px;
+      @media (max-width: 550px) {
+        width: 40%;
+        display: flex;
+        margin: 10px;
+      }
     }
   }
   &__title {
     text-align: start;
     margin-bottom: 10px;
     font-size: 40px;
+    @media (max-width: 550px) {
+      font-size: 30px;
+    }
   }
 }
 </style>
