@@ -131,5 +131,9 @@ export default {
     margin: 0 10px;
     font-size: 18px;
   }
+  @media (max-width: 550px) {
+    padding: 10px 0;
+    width: 90%;
+  }
 }
 </style>

@@ -18,7 +18,8 @@ button {
   cursor: not-allowed;
   font-size: 15px;
   transition: all 0.2s ease;
-  width: 150px;
   opacity: 0.5;
+  width: 100%;
+  max-width: 150px;
 }
 </style>

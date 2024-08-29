@@ -1,11 +1,11 @@
 <template>
-  <ListBooks />
+  <SaveBooks />
 </template>
 <script>
-import ListBooks from "../components/ListBooks.vue";
+import SaveBooks from "../components/SaveBooks.vue";
 export default {
   components: {
-    ListBooks,
+    SaveBooks,
   },
 };
 </script>

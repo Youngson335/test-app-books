@@ -1,10 +1,16 @@
 <template>
   <div class="posted">
-    <button class="posted--btn">Выложить книгу</button>
+    <button @click="addBook" class="posted--btn">Выложить книгу</button>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    addBook() {
+      this.$emit("addedBook", true);
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 button {

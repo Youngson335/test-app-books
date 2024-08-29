@@ -34,30 +34,50 @@
         </select>
       </div>
 
-      <BtnPostBook class="add-book__btn" />
+      <BtnPostBook class="add-book__btn" @addedBook="addedBook" />
     </form>
   </div>
+  <Notification
+    :showNotification="showNotification"
+    @resetNotification="resetNotification"
+  />
 </template>
 
 <script>
-import BtnPostBook from "@/components/BtnPostBook.vue";
-import { mapMutations } from "vuex";
+import BtnPostBook from "../components/BtnPostBook.vue";
+import Notification from "../components/Notification.vue";
 
 export default {
   components: {
     BtnPostBook,
+    Notification,
   },
   data() {
     return {
       bookName: "",
       seller: "",
       integrationType: "",
-      books: JSON.parse(localStorage.getItem("listBooks")) || [],
-      bookIdCounter: Number(localStorage.getItem("bookIdCounter")) || 1,
+      books: JSON.parse(localStorage.getItem("listBooks")) || [], // Книги загружаются из localStorage, если данные есть
+      bookIdCounter: Number(localStorage.getItem("bookIdCounter")) || 1, // Счётчик для уникальных ID книг
+      showNotification: false,
     };
   },
   methods: {
-    ...mapMutations(["saveNewBook"]),
+    resetNotification(val) {
+      this.showNotification = val;
+    },
+    addedBook(val) {
+      // Проверяем, что все обязательные поля заполнены
+      if (
+        this.bookName != "" &&
+        this.integrationType != "" &&
+        this.seller != ""
+      ) {
+        this.showNotification = val;
+      } else {
+        this.showNotification = false;
+      }
+    },
     addBook() {
       if (this.bookName && this.seller && this.integrationType) {
         const newBook = {
@@ -67,14 +87,13 @@ export default {
           integration: this.integrationType,
         };
 
-        this.books.push(newBook);
-        localStorage.setItem("listBooks", JSON.stringify(this.books));
+        this.books.push(newBook); // Добавляем новую книгу в массив
+        localStorage.setItem("listBooks", JSON.stringify(this.books)); // Сохраняем обновлённый массив в localStorage
 
-        this.bookIdCounter++;
+        this.bookIdCounter++; // Увеличиваем счётчик ID и сохраняем его
         localStorage.setItem("bookIdCounter", this.bookIdCounter);
 
-        this.saveNewBook(this.books);
-
+        // Очищаем поля формы после добавления
         this.bookName = "";
         this.seller = "";
         this.integrationType = "";
@@ -105,6 +124,10 @@ export default {
         opacity: 1;
         transform: translateY(0px);
       }
+    }
+    @media (max-width: 400px) {
+      max-width: 300px;
+      margin: 0 auto;
     }
   }
   &__field {
